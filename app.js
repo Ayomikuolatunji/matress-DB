@@ -2,7 +2,9 @@ const express=require("express");
 const app=express()
 const routes=require("./route/route")
 const connectFunc=require("./db/db")
-
+const ErrorPage=require("./util/404")
+const cors = require('cors')
+app.use(cors())
 require('dotenv').config();
 
 
@@ -10,7 +12,9 @@ require('dotenv').config();
 
 app.use(express.json())
 
-app.use("/api/products",routes)
+// routes
+app.use("/api/products",routes);
+app.use(ErrorPage)
 
 
 const port=process.env.PORT || 5000;
