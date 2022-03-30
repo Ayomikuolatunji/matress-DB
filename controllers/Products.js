@@ -1,3 +1,4 @@
+const res = require("express/lib/response")
 const ProductSchema=require("../models/Products")
 
 const getAllProducts=async(req,res,next)=>{
@@ -16,4 +17,16 @@ const postNewProduct=async(req,res,next)=>{
         res.status(500).json({msg:error})
     }
 }
-module.exports={getAllProducts,postNewProduct}
+
+const getSIngleProduct=async(req,res,next)=>{
+    try {
+        const {id}=req.params;
+        const prods=await ProductSchema.findById({_id:id})
+        if(!prods){
+            return res,status(404).json({msg:`product with ${id} not found`})
+        }
+    } catch (error) {
+        res.status(500).json({msg:error})
+    }
+}
+module.exports={getAllProducts,postNewProduct,getSIngleProduct}
