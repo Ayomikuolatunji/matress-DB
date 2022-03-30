@@ -6,10 +6,15 @@ const connectFunc=require("./db/db")
 require('dotenv').config();
 
 
+
+
+app.use(express.json())
+
 app.use("/api/products",routes)
 
 
 const port=process.env.PORT || 5000;
+
 
 const  Startserver=async(key)=>{
    await connectFunc(key).then(()=>{
