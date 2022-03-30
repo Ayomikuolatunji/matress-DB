@@ -20,8 +20,8 @@ const postNewProduct=async(req,res,next)=>{
 
 const getSIngleProduct=async(req,res,next)=>{
     try {
-        const {id:prodId}=req.params;
-        const prods=await ProductSchema.findOne({_id:prodId})
+        const {id}=req.params;
+        const prods=await ProductSchema.findOne({_id:id})
         if(!prods){
             return res.status(404).json({msg:`No product with ${id} not found`})
         }
